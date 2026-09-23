@@ -158,7 +158,7 @@ gtk-update-icon-cache ~/.local/share/icons/hicolor 2>/dev/null || true
 update-desktop-database ~/.local/share/applications 2>/dev/null || true
 ```
 
-Если хотите также удалить сохранённый профиль и кэш Алисы:
+‼️ Если хотите также удалить сохранённый профиль и кэш Алисы:
 
 ```bash
 rm -rf ~/.config/alice-app
