@@ -6,19 +6,22 @@ DESKTOP_FILE="alice-app.desktop"
 ICON_FILE="alice_512.png"
 APP_DIR="$HOME/.local/share/applications"
 ICON_DIR="$HOME/.local/share/icons/hicolor/512x512/apps"
+BIN_DIR="$HOME/.bin"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Создаём папки, если их нет
 mkdir -p "$APP_DIR"
 mkdir -p "$ICON_DIR"
+mkdir -p "$BIN_DIR"
 
 # Делаем скрипт запуска исполняемым
 chmod +x "$SCRIPT_DIR/alice-window.sh"
+cp "$SCRIPT_DIR/alice-window.sh" "$BIN_DIR/alice-window.sh"
 
 # Копируем .desktop с подстановкой актуального пути к скрипту запуска
-sed "s|^Exec=.*|Exec=$SCRIPT_DIR/alice-window.sh|" "$DESKTOP_FILE" > "$APP_DIR/$DESKTOP_FILE"
-echo "✓ $DESKTOP_FILE → $APP_DIR/ (с путём $SCRIPT_DIR/alice-window.sh)"
+sed "s|^Exec=.*|Exec=$BIN_DIR/alice-window.sh|" "$DESKTOP_FILE" > "$APP_DIR/$DESKTOP_FILE"
+echo "✓ $DESKTOP_FILE → $APP_DIR/ (с путём $BIN_DIR/alice-window.sh)"
 
 # Копируем иконку
 cp "$ICON_FILE" "$ICON_DIR/"

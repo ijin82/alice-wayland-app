@@ -6,7 +6,7 @@ APP_CLASS="chrome-ya.ru__alice-Default"
 PROFILE_DIR="$HOME/.config/alice-app"
 
 # Чтобы запускать в полноэкранном режиме, раскомментируйте:
-FS_FLAG="--start-fullscreen"
+# FS_FLAG="--start-fullscreen"
 
 exec "$BROWSER" \
   --app="$URL" \

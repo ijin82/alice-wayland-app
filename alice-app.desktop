@@ -2,7 +2,7 @@
 Type=Application
 Name=Алиса
 Comment=Алиса как отдельное веб‑приложение
-Exec=/home/ijin/Yandex.Disk/_AltLinux/Alice-YB/alice-window.sh
+Exec=alice-window.sh
 Icon=alice_512
 Terminal=false
 Categories=Utility;

@@ -1,9 +1,8 @@
-# Alice-YB: Яндекс Алиса для Linux (GNOME / Wayland)
+# Яндекс Алиса для Linux (GNOME / Wayland) + YB
 
 <img width="256" height="256" alt="alice_512" src="https://github.com/user-attachments/assets/39f9c777-e156-4883-b5e8-adb223dd5000" />  
 
-
-> "Автономный клиент" для голосового помощника и нейросети **Яндекс Алиса** на базе Яндекс Браузера без фонового агента с полноценной интеграцией в GNOME и Wayland.
+> "Автономный клиент" для голосового помощника и нейросети **Яндекс Алиса** на базе Яндекс Браузера без фонового агента с  интеграцией в GNOME и Wayland.
 
 ---
 
@@ -34,17 +33,20 @@
 ## 🚀 Установка
 
 1. Склонируйте репозиторий (или скачайте архив):
+
    ```bash
-   git clone https://github.com/your-username/Alice-YB.git
-   cd Alice-YB
+   git clone https://github.com/ijin82/alice-wayland-app.git
+   cd alice-wayland-app
    ```
 
 2. Запустите скрипт установки:
+
    ```bash
    ./install.sh
    ```
 
 Скрипт автоматически:
+
 * Сделает скрипт запуска `alice-window.sh` исполняемым;
 * Пропишет актуальный абсолютный путь в файл ярлыка `.desktop`;
 * Скопирует ярлык в `~/.local/share/applications/`;
@@ -60,6 +62,7 @@
 * **Запуск из меню:** Откройте обзор приложений GNOME (`Super` / `Win`) и найдите **«Алиса»**.
 * **Закрепление в доке:** Правый клик по иконке в доке → **«Добавить в избранное»**.
 * **Запуск из терминала:**
+
   ```bash
   ./alice-window.sh
   ```
@@ -73,16 +76,21 @@
 Параметры запуска настраиваются в файле `alice-window.sh`:
 
 ### 1. Полноэкранный режим (Kiosk / Smart Display)
+
 Если вы хотите использовать Алису на отдельном мониторе или в полноэкранном режиме, раскомментируйте или добавьте флаг:
+
 ```bash
 FS_FLAG="--start-fullscreen"
 ```
 
 ### 2. Расположение профиля
+
 По умолчанию данные сессии хранятся в:
+
 ```bash
 PROFILE_DIR="$HOME/.config/alice-app"
 ```
+
 При необходимости директорию можно изменить (например, если требуется несколько независимых профилей).
 
 ---
@@ -96,6 +104,7 @@ chrome-ya.ru__alice-Default
 ```
 
 Традиционный флаг `--class` в среде Wayland игнорируется. Чтобы док GNOME (Dash to Dock) корректно группировал окна и отображал иконку Алисы вместо дефолтной иконки-шестерёнки:
+
 * В `alice-app.desktop` задан параметр `StartupWMClass=chrome-ya.ru__alice-Default`;
 * В `install.sh` создаётся псевдоним иконки с соответствующим идентификатором приложения.
 
@@ -106,6 +115,7 @@ chrome-ya.ru__alice-Default
 Текущая конфигурация «из коробки» **рассчитана исключительно на сессию Wayland**. Если запустить её в X11, окно не сможет связаться с ярлыком: в доке снова появится шестерёнка либо окно объединится в одну группу с обычным Яндекс Браузером.
 
 ### В чём разница:
+
 * В **Wayland** сопоставление выполняется по `app_id`. Chromium при запуске `--app` жестко задает его в виде `chrome-ya.ru__alice-Default`.
 * В **X11 (Xorg)** оконный менеджер сопоставляет окна по свойству `WM_CLASS`, которое состоит из двух значений `(instance, class)`:
   * По умолчанию Chromium в X11 генерирует `WM_CLASS`:
@@ -116,18 +126,22 @@ chrome-ya.ru__alice-Default
 
 1. **В файле `alice-app.desktop`:**
    Изменить `StartupWMClass` на класс окна X11:
+
    ```ini
    StartupWMClass=AliceApp
    ```
+
    *(либо `StartupWMClass=ya.ru__alice`, если запуск производится без флага `--class`)*.
 
 2. **В файле `alice-window.sh`:**
    Указать желаемый класс окна (под X11 Chromium реагирует на флаг `--class`):
+
    ```bash
    APP_CLASS="AliceApp"
    ```
 
 3. **Обновить кэш ярлыков:**
+
    ```bash
    update-desktop-database ~/.local/share/applications/
    ```
@@ -141,6 +155,7 @@ chrome-ya.ru__alice-Default
 Чтобы удалить ярлык и иконку из системы:
 
 ```bash
+rm -f ~/.bin/alice-window.sh
 rm -f ~/.local/share/applications/alice-app.desktop
 rm -f ~/.local/share/icons/hicolor/512x512/apps/alice_512.png
 rm -f ~/.local/share/icons/hicolor/512x512/apps/chrome-ya.ru__alice-Default.png
@@ -149,6 +164,7 @@ update-desktop-database ~/.local/share/applications 2>/dev/null || true
 ```
 
 Если хотите также удалить сохранённый профиль и кэш Алисы:
+
 ```bash
 rm -rf ~/.config/alice-app
 ```
