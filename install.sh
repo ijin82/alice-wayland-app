@@ -18,6 +18,7 @@ mkdir -p "$BIN_DIR"
 # Делаем скрипт запуска исполняемым
 chmod +x "$SCRIPT_DIR/alice-window.sh"
 cp "$SCRIPT_DIR/alice-window.sh" "$BIN_DIR/alice-window.sh"
+chmod +x "$BIN_DIR/alice-window.sh"
 
 # Копируем .desktop с подстановкой актуального пути к скрипту запуска
 sed "s|^Exec=.*|Exec=$BIN_DIR/alice-window.sh|" "$DESKTOP_FILE" > "$APP_DIR/$DESKTOP_FILE"
